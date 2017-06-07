@@ -1,0 +1,14 @@
+[usr]
+    name = Steven Ballagh
+[user]
+	name = Steven Ballagh
+	email = steven.ballagh@gmail.com
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+[core]
+[credential]
+	helper = cache --timeout=3600
+[push]
+	default = simple

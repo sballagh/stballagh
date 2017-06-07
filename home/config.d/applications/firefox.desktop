@@ -1,0 +1,18 @@
+[Desktop Entry]
+Categories=Network;WebBrowser;GTK;
+Comment=Web Browser
+Encoding=UTF-8
+Exec=ksystraycmd firefox %u
+GenericName=Web Browser
+Icon=firefox
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;application/x-xpinstall;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
+Name=Firefox
+NoDisplay=false
+Path[$e]=
+StartupNotify=true
+Terminal=0
+TerminalOptions=
+TryExec=firefox
+Type=Application
+X-KDE-SubstituteUID=true
+X-KDE-Username=browser

@@ -1,0 +1,19 @@
+#!/bin/bash
+geeknote="$(which python) $GEEKNOTE_HOME/geeknote.py"
+tags=()
+if [[ $@ != *@* ]];
+then
+    tags=("@work")
+fi
+
+if [[ $# -gt 0 ]];
+then
+    tags+=($@)
+fi
+SAVE_IFS=$IFS
+IFS=","
+jtags="${tags[*]}"
+IFS=$SAVE_IFS
+
+$geeknote find --notebooks action --tags "$jtags"
+

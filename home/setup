@@ -1,0 +1,81 @@
+#!/bin/bash
+function makedir() {
+    dir="$1"
+    if [[ ! -d "$dir" ]]
+    then
+        mkdir "$dir"
+    fi
+}
+function install() {
+    app="$1"
+    case "$app" in
+        bcs)
+            path=$(which prompt &> /dev/null)
+            rtn=$?
+            ;;
+        *)
+            path=$(which "$app" &> /dev/null)
+            rtn=$?
+            ;;
+    esac
+    if [[ $rtn = 0 ]]
+    then
+        printf '%s is already installed\n' "$app"
+    else
+        printf 'installing %s.........................................................' "$app"
+        makedir "$HOME/.src"
+        case "$app" in
+            colorize|bcs)
+                cd "$HOME/.src"
+                hg clone "ssh://hg@bitbucket.org/sballagh/$app"
+                cd "$HOME/.src/$app"
+                sudo python3 setup.py install
+                ;;
+            *)
+                ;;
+        esac
+        printf '\b\b\b\b\b\b[done]\n'
+    fi
+
+}
+# #####################################################
+#                   setup the ssh folder
+# #####################################################
+# if the directory exists, make a copy of it
+mv "$HOME/.ssh" "$HOME/.ssh-$$"
+# copy the files from the ssh.d folder
+cp -R "$HOME/.home/ssh.d" "$HOME/.ssh"
+# restrict access to the files
+chmod -R u+rwX "$HOME/.ssh"
+chmod -R g-rwx "$HOME/.ssh"
+chmod -R o-rwx "$HOME/.ssh"
+# #####################################################
+# install the colorizer
+# #####################################################
+install colorize
+# #####################################################
+# install the bcs package
+# #####################################################
+install bcs
+# #####################################################
+# begin setup of home directory
+# #####################################################
+case ":$PATH:" in
+    *":/$HOME/.home:"*) :;;
+    *) PATH="$PATH:/$HOME/.home" ;;
+esac
+# #####################################################
+# copy the links from links.d to $HOME
+# #####################################################
+files=($(find "$HOME/.home/links.d" -maxdepth 1 -printf '%P\n' | sort -f))
+cd "$HOME"
+for file in "${files[@]}"
+do
+    if [[ -e "$HOME/$file" ]]
+    then
+        rm "$HOME/$file"
+    fi
+    ln -s ".home/links.d/$file" "$file"
+done
+
+. .bashrc

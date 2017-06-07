@@ -1,0 +1,67 @@
+
+@import('../main.css');
+
+body {
+  background-color: #000000;
+}
+.koneBuddyIconME {
+  background-color:#3D3D3D ;
+  border:solid 1px #000000;
+  color:#000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+.koneBuddyIconYOU {
+  background-color:#3D3D3D;
+  border:solid 1px #000000;
+  color:#000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+
+.koneIncContainer {
+  border-top:#000000 solid 1px;
+  background-color:#3D3D3D;
+  color:#000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+.koneIncContainer a:link  { color:#000000;}
+.koneOutContainer {
+  border-top:#000000 solid 1px;
+  background-color:#2A2A2A;
+  color:#000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+.koneOutContainer a:link  { color:#000000;}
+.koneIncContainerA {
+  border-top:#000000 solid 1px;
+  background-color:#3d3d3d;
+  color:black;
+}
+.koneIncContainerA a:link  { color:#000000;}
+.koneOutContainerA {
+  border-top:#000000 solid 1px;
+  background-color:#3d3d3d;
+  color:#000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+.koneOutContainerA a:link  { color:#000000;}
+.koneIntContainer {
+  background-color:#3d3d3d;
+  color: #000000;
+  text-shadow: #cccccc 0 0 3px;
+}
+.koneIntContainer a:link  { color:#3D3D3D;}
+.koneIncContainer a:hover, .koneOutContainer a:hover,
+.koneIncContainerA a:hover, .koneOutContainerA a:hover, .koneIntContainer a:hover {
+  color:white;
+}
+.koneBodyltr, .koneBodyrtl {
+  color: white;
+  text-shadow: none;
+}
+.koneIncContainerA .koneBodyltr, .koneOutContainerA .koneBodyltr, .koneIntContainer .koneBodyltr,
+.koneIncContainerA .koneBodyrtl, .koneOutContainerA .koneBodyrtl, .koneIntContainer .koneBodyrtl {
+  color: inherit;
+}
+.koneBorderTop {
+  border-top: solid #2A2A2A 1px;
+}

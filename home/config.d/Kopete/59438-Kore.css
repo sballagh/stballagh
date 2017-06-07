@@ -1,0 +1,60 @@
+
+@import('../main.css');
+
+body {
+  background-color: #000000;
+}
+.koneBuddyIconME {
+  background-color:#3D3D3D ;
+  border:solid 1px #717171;
+  color:#AAAAAA;
+}
+.koneBuddyIconYOU {
+  background-color:#3D3D3D;
+  border:solid 1px #717171;
+  color:#AAAAAA;
+}
+
+.koneIncContainer {
+  border-top:#717171 solid 1px;
+  background-color:#3D3D3D;
+  color:#AAAAAA;
+}
+.koneIncContainer a:link  { color:#717171;}
+.koneOutContainer {
+  border-top:#717171 solid 1px;
+  background-color:#2A2A2A;
+  color:#AAAAAA;
+}
+.koneOutContainer a:link  { color:#717171;}
+.koneIncContainerA {
+  border-top:#717171 solid 1px;
+  background-color:#000000;
+  color:black;
+}
+.koneIncContainerA a:link  { color:#AAAAAA;}
+.koneOutContainerA {
+  border-top:#717171 solid 1px;
+  background-color:#000000;
+  color:#717171;
+}
+.koneOutContainerA a:link  { color:#AAAAAA;}
+.koneIntContainer {
+  background-color:#000000;
+  color: #717171;
+}
+.koneIntContainer a:link  { color:#382F26;}
+.koneIncContainer a:hover, .koneOutContainer a:hover,
+.koneIncContainerA a:hover, .koneOutContainerA a:hover, .koneIntContainer a:hover {
+  color:white;
+}
+.koneBodyltr, .koneBodyrtl {
+  color: #AAAAAA;
+}
+.koneIncContainerA .koneBodyltr, .koneOutContainerA .koneBodyltr, .koneIntContainer .koneBodyltr,
+.koneIncContainerA .koneBodyrtl, .koneOutContainerA .koneBodyrtl, .koneIntContainer .koneBodyrtl {
+  color: inherit;
+}
+.koneBorderTop {
+  border-top: solid #2A2A2A 1px;
+}

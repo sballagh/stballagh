@@ -1,0 +1,15 @@
+#part of the Pentaho Reporting filesystem config store
+#Wed Sep 08 12:55:16 EDT 2010
+org.pentaho.reporting.engine.classic.core.modules.gui.pdf.TargetFileName=/home/sballagh/Documents/Historical Charge-off Calculation Report.sample.pdf
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.Author=
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.EmbedFonts=true
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowFillIn=false
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.Description=
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowAssembly=false
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.Title=
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.Encoding=Cp1252
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowCopy=false
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowModifyContents=false
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowScreenReaders=false
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.Keywords=
+org.pentaho.reporting.engine.classic.core.modules.output.pageable.pdf.AllowModifyAnnotations=false

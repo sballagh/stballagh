@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function usage() {
+    echo "Usage: $(basename $0) USERNAME"
+}
+function login() {
+    target="${1:-me}"
+     if [[ $USER = $target ]]; then
+        printf 1>&2 'you are already "%s"!\n' "$target"
+        exit 1
+    else
+        cd
+        NEW_HOME="${HOME}/.local/home/${target}"
+        if [[ ! -d "${NEW_HOME}" ]]; then
+            mkdir -p "${NEW_HOME}"
+            # first copy everything from the default home directory into the new home
+            if [[ -d "${NEW_HOME}" ]]
+            then
+            # if the default directory exists, copy the contents to a NEW temporary target directory
+                if [[ -e "${HOME}/.home/be.d/default" ]]
+                then
+                    fs=( $(find "${HOME}/.home/be.d/default" -mindepth 1 -maxdepth 1 ) )
+                    for file in "${fs[@]}"
+                    do
+                        sudo cp --recursive --dereference --update  "$file" "$NEW_HOME"
+                    done
+                    if [[ -e "${HOME}/.home/be.d/$target" ]]; then
+                        ts=( $(find "${HOME}/.home/be.d/$target" -mindepth 1 -maxdepth 1 ) )
+                        for file in "${ts[@]}"
+                        do
+                            sudo cp --recursive --dereference --force "$file" "$NEW_HOME"
+                        done
+                    fi
+                fi
+                # copy all of the keychain files over to the new home
+                sudo cp --recursive --dereference --force "${HOME}/.keychain" "$NEW_HOME"
+            fi
+            sudo chown -R "${target}":"${target}" "${NEW_HOME}"
+            sudo chmod -R 775 "${NEW_HOME}"
+        fi
+        if [ -d "${NEW_HOME}" ]; then
+            cd "${NEW_HOME}"
+            exec sudo -u"$target" bash -c "$(cat -<<"EOSH"
+                unset COMMON_HOME
+                HOME="`pwd`"
+                PATH=$PATH:$HOME/bin
+                exec ssh-agent bash --login
+EOSH
+)"
+        fi
+    fi
+}
+if [ $# -eq 1 ]; then
+    login $1
+else
+    usage $@;
+fi
+

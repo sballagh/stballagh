@@ -1,0 +1,1 @@
+../../links.d/.bash_logout

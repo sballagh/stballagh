@@ -1,0 +1,20 @@
+#!/bin/sh
+files_with_matches=false
+case "${1}" in
+    -l|--files-with-matches)
+        files_with_matches=true
+        PATTERN="${2}"
+        DIRECTORY="${3:-$(pwd)}"
+        ;;
+    *)
+        PATTERN="${1}"
+        DIRECTORY="${2:-$(pwd)}"
+        ;;
+esac
+if $files_with_matches;  then
+    grep --devices=skip --recursive -i --binary-files=without-match --color=always -l "${PATTERN}" "${DIRECTORY}"
+else
+    grep --devices=skip --recursive -i --binary-files=without-match --color=always "${PATTERN}" "${DIRECTORY}"
+fi
+
+

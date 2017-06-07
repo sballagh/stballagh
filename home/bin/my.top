@@ -1,0 +1,23 @@
+#!/bin/bash
+USER=root HOST=localhost PASS= DB=arcsys
+
+CMD=$(which mytop 2> /dev/null)
+rtn=$?
+if [[ $rtn = 0 ]]
+then
+    if $(which passwds2 &> /dev/null)
+    then
+        PASS=$(passwds2 --user=$USER --host=$HOST --provider=mysql)
+    elif $(which passwds &> /dev/null)
+    then
+        PASS=$(passwds $HOST mysql $USER)
+    fi
+    if [[ -z $PASS ]]
+    then
+        $CMD --prompt --user=$USER --host=$HOST --database=$DB $@
+    else
+        $CMD --pass=$PASS --user=$USER --host=$HOST --database=$DB $@
+    fi
+else
+    echo "mytop is not installed"
+fi

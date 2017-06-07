@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/sballagh/.common.home/links/profile.d'
+let g:netrw_dirhist_2='/store/projects/acl-hot/database/arcsys/versions/version-1.7.7'
+let g:netrw_dirhist_3='/store/projects/acl-hot/database/snapshot/versions/version-1.7.7'
+let g:netrw_dirhist_4='/home/sballagh/.config/mono.backup'
+let g:netrw_dirhist_5='/home/sballagh/.config/mono.backup/MonoDevelop-4.0'
+let g:netrw_dirhist_6='/home/sballagh/.config/mono.backup/MonoDevelop-4.0/repository-cache'
+let g:netrw_dirhist_7='/home/sballagh/.home/bin'

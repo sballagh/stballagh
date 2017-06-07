@@ -1,0 +1,53 @@
+#################################
+# Database Connection Variables #
+#################################
+ARCSYS_HOSTNAME=arcsys-003
+ARCSYS_DATABASE=arcsys
+ARCSYS_PORT=3306
+ARCSYS_USERNAME=sballagh
+ARCSYS_PASSWORD=kbyf!!132303
+
+#################################
+#         SMTP Variables        #
+#################################
+SMTP_SERVER_NAME=smtp.harbingertechsolutions.com
+SMTP_SERVER_PORT=25
+SMTP_SERVER_USERNAME=support@harbingertechsolutions.com
+SMTP_SERVER_PASSWORD=Encrypted 2be98afc86aa7f2e4a70aa5748ec0f689
+
+#################################
+#        EMAIL Variables        #
+#################################
+EMAIL_SENDER_NAME=ARCSys Automation
+EMAIL_SENDER_ADDRESS=noreply@harbingertechsolutions.com
+EMAIL_REPLY_TO=support@harbingertechsolutions.com
+EMAIL_CONTACT_PERSON=Steven Ballagh
+EMAIL_CONTACT_PHONE=757-228-7878
+EMAIL_BCC=support@harbingertechsolutions.com
+
+#################################
+#         SFTP Variables        #
+#################################
+SFTP_SERVER_NAME=arcsys-001
+SFTP_SERVER_PORT=22
+SFTP_SERVER_USERNAME=harbinger
+SFTP_SERVER_PASSWORD=Encrypted 2be98afc86aa7f2e4a70aa5748ec0f689
+SFTP_REMOTE_DIRECTORY=/srv/www/uploads
+SFTP_TARGET_DIRECTORY=/tmp/uploads
+
+#################################
+#      Directory Variables      #
+#################################
+STORAGE_DIRECTORY=/var/arcsys/files
+
+#################################
+#       Equifax Variables       #
+#################################
+FTP_REMOTE_SERVER_IP=216.46.96.185
+FTP_USERNAME=HarbinTS
+FTP_PASSWORD=vsq868sh
+FTP_DIRECTORY=/outbound
+EQUIFAX_DIRECTORY=/var/arcsys/downloads/equifax
+EQUIFAX_PGP_KEY=Equifax
+
+

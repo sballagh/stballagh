@@ -1,0 +1,34 @@
+#!/bin/bash
+# Determine if the common folder is available and use it
+if [[ -d "${HOME}/.common.home" ]];
+then
+    COMMON_HOME="${HOME}/.common.home"
+    PATH="$PATH:$COMMON_HOME/bin"
+    export COMMON_HOME PATH
+fi
+
+if [[ -z $MAN_POSIXLY_CORRECT ]]
+then
+    MAN_POSIXLY_CORRECT=1
+    export MAN_POSIXLY_CORRECT
+fi
+
+source "${HOME}/.colors" &> /dev/null
+source "${HOME}/.alias" &> /dev/null
+source "${HOME}/.inputrc" &> /dev/null
+alias ssh="sudo -u sballagh ssh"
+#
+# Construct the colorful prompt
+# ######################################
+if [[ -z $COLORIZE ]]; then
+    # Use a tasteful monochromatic prompt
+    PS1='[\t] \u@\h in \w$(hg.prompt)\n\$ '
+elif [ "$UID" -eq 0 -a -n "$TERM" -a -t ]; then
+    # Superuser Prompt is colorful and has a touch of Bold
+    PS1='\[${ClearLine}\]\[${RedBG}\]\[${Bold}\]\[${White}\][\t]\[${Normal}\] \[${Bold}\]\[${Red}\]\u\[${Green}\]@\h \[${Normal}\]in \[${Magenta}\]\w$(hg.prompt)\[${Normal}\]\n\[${ClearLine}\]\$ '
+else
+    # User Prompt is colorful and descriptive
+    PS1='\[${ClearLine}\]\[${Cyan}\][\t] \[${Red}\]\u\[${Green}\]@\h \[${Normal}\]in \[${Magenta}\]\w$(hg.prompt)\[${Normal}\]\n\[${ClearLine}\]\$ '
+fi
+
+eval `cat ${HOME}/.keychain/*-sh*`

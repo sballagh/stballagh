@@ -1,0 +1,89 @@
+alias ..='cd ..'
+alias ls='ls --color=tty --block-size=M --group-directories-first'
+alias lz='ls -Sl'
+alias lt='ls -tl'
+alias la='ls -al'
+alias lll='ll'
+alias llll='ll'
+if $(which trash-put &>/dev/null) 
+then
+    alias trash="trash-put --verbose "
+    alias rm='trash-put --verbose '
+    alias rd='trash-put --recursive --verbose --force'
+fi
+alias vi="vim"
+alias mv="mv -v"
+alias cp="cp -v"
+alias u="cd .."
+alias uu="cd ../.."
+alias uuu="cd ../../.."
+alias uuuu="cd ../../../.."
+alias uuuuu="cd ../../../../.."
+# ###########################################
+# Process List Aliases
+# ###########################################
+alias psu="ps -fu sballagh"
+alias psa="ps -ef"
+alias less='sudo env LESS="$LESS" less'
+alias zypper=$(which zypper)
+case "$(groups $user)" in  
+  *wheel*) 
+        case ":$PATH:" in
+            *":/usr/sbin:/sbin:"*) :;; # path already includes /usr/sbin and /sbin
+            *) PATH="$PATH:/usr/sbin:/sbin"; export PATH ;;
+        esac
+        commands=(systemctl zypper yast updatedb tail less cat)
+        for cmd in "${commands[@]}" 
+        do 
+            alias $cmd="sudo ${cmd}"
+        done
+        ;;
+    *) 
+        ;;
+esac
+# ###########################################
+# Zypper Aliases
+# ###########################################
+alias z='zypper'
+alias zi="z install --download in-advance -l"
+alias zr="z refresh"
+alias zrm="z remove"
+alias zs="z search --details"
+alias zsip="z search --details --installed-only --type package"
+alias zu="z update --download in-advance -l"
+alias zp="z patch --download in-advance -l"
+alias zlu="z list-updates --all"
+alias zlp="z lp"
+alias zlr="z lr --url --sort-by-name"
+alias zmr="z mr"
+alias zps="z ps"
+alias zdup="z dup --download in-advance --auto-agree-with-licenses"
+alias zdup-dry="z dup --download in-advance --auto-agree-with-licenses --dry-run"
+# #############################################
+# Misc Aliases
+# #############################################
+alias beroot="be root"
+alias chhg="hg --repository /home/sballagh/.common.home "
+alias rgrep="my.grep"
+alias pip="sudo pip"
+# #############################################
+# SSH Aliases
+# #############################################
+alias ssh-tyr="ssh -t project ssh -t tyr               screen -dRR"
+alias ssh-vidar="ssh -t vidar                          screen -dRR"
+alias ssh-project="ssh -t project.arcsysonline.net     screen -dRR"
+alias ssh-tdb="ssh -t test-db.arcsysonline.net         screen -dRR"
+alias ssh-twa="ssh -t test-webapp.arcsysonline.net     screen -dRR"
+alias ssh-tws="ssh -t test-webservice.arcsysonline.net screen -dRR"
+alias ssh-pdb="ssh -t prod-db.arcsysonline.net         screen -dRR"
+alias ssh-pwa="ssh -t prod-webapp.arcsysonline.net     screen -dRR"
+alias ssh-pws="ssh -t prod-webservice.arcsysonline.net screen -dRR"
+# #############################################
+# Geeknote Aliases
+# #############################################
+alias geeknote="python ${GEEKNOTE_HOME}/geeknote.py"
+alias gn='geeknote'
+alias nn="ll"
+alias qiv="qiv -N -M -m -X 1 "
+alias siv="qiv -s"
+alias clr="cd ~; history -c; clear;"

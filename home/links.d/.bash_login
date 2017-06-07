@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# This file is executed  after ~/.bash_profile and before ~/.profile when BASH is invoked as a login shell
+echo "Sourcing .bash_login"
+#!/bin/bash
+# =========================================================================================
+# Use kaskpass if it is installed
+# =========================================================================================
+if which keychain
+then
+    eval `keychain --quick --inherit any --eval id_rsa`
+fi

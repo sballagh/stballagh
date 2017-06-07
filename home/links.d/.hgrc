@@ -1,0 +1,55 @@
+[extensions]
+bookmarks=
+churn=
+color=
+extdiff=
+fetch=
+graphlog=
+hgk=
+mq=
+progress=
+prompt=/usr/local/share/hg-prompt/prompt.py
+rebase=
+transplant=
+
+[bookmarks]
+track.current = True
+
+[paths]
+acl=ssh://hg@project/acl
+
+[ui]
+email = Steven Ballagh <steven.ballagh@gmail.com>
+merge = diffuse
+ssh = ssh -C
+username = sballagh
+
+[alias]
+blog = log --limit 5 --branch .
+blog = log -b . --limit 10
+bpull = pull -b . --rebase
+bpush = push -b .
+graph = log --graph
+modified = status --modified --no-status
+qstatus = status --rev -2:.
+revert = revert --no-backup
+
+[diff]
+nodates=1
+git=1
+
+[extdiff]
+cmd.diff = colordiff
+opts.diff = -Nprc
+cmd.vdiff = colordiff
+opts.vdiff = --new-file --show-c-function --recursive --ignore-all-space --strip-trailing-cr --expand-tabs --side-by-side --width=240
+cmd.diffuse =
+opts.diffuse = -mw
+
+[merge-tools]
+diffuse.priority = 100
+diffuse.args = $base $local $output $other $base
+diffuse.premerge = True
+
+[web]
+cacerts = /etc/ssl/ca-bundle.pem

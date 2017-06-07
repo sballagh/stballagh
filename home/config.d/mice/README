@@ -1,0 +1,7 @@
+# README
+#
+# copy consoleUserPerms to /etc/hotplug/usb/consoleUserPerms
+# sudo cp -v consoleUserPerms /etc/hotplug/usb/
+#
+# copy the usermap file to /etc/hotplug/usb/logitechmouse.usermap, as shown below
+

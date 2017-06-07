@@ -1,0 +1,111 @@
+#!/bin/bash
+
+#to run "tail --follow=name" on any file, use, for example: follow /var/log/messages
+#to have the function automatically use "sudo" when executed as a non-root user, use, for example: follow --elevate /var/log/message
+#as log lines scroll, each line is prepended with the basename of the log file from which it was read, so many log files can be foll
+#at the same time. after "following" one or more files, review the all using the bash built-in "jobs" command.
+#when run with no log file arguments, this function attempts to "follow" /var/log/messages and /var/log/syslog.
+pid=${BASHPID:-$$} files=() tail='sudo tail' test='sudo test' host=$(hostname -s) grep="" dir="/var/log/arcsys"
+declare -a indeces=( aws arc err sql sqld sqlerr)
+declare -A elev log link color
+#declare -A log
+#declare -A link
+#declare -A color
+
+# Color declarations
+Bold="\[$(tput bold )\]"
+Black="$(tput setaf 0)"
+Red="$(tput setaf 1)"
+Green="$(tput setaf 2)"
+Yellow="$(tput setaf 3)"
+Blue="$(tput setaf 4)"
+Magenta="$(tput setaf 5)"
+Cyan="$(tput setaf 6)"
+White="$(tput setaf 7)"
+BlackBG="$(tput setab 0)"
+RedBG="$(tput setab 1)"
+GreenBG="$(tput setab 2)"
+BrownBG="$(tput setab 3)"
+BlueBG="$(tput setab 4)"
+PurpleBG="$(tput setab 5)"
+MagentaBG="$(tput setab 6)"
+Normal="$(tput sgr0)" # No Color
+
+link["aws"]="aws__log"
+link["arc"]="arc__log"
+link["err"]="err__log"
+link["sql"]="sql__log"
+link["sqld"]="sqld_log"
+link["sqlerr"]="sqld_err"
+
+log["aws"]="${dir}/ArcSys.Web.Services.log"
+log["arc"]="${dir}/ArcSys.log"
+log["err"]="/var/log/apache2/error_log"
+log["sql"]="/var/log/mysql/mysql.log"
+log["sqld"]="/var/log/mysql/mysqld.log"
+log["sqlerr"]="/var/log/mysql/mysql.err"
+
+color["arc"]="${Cyan}"
+color["aws"]="${Green}"
+color["err"]="${Red}"
+color["sql"]="${Yellow}"
+color["sqld"]="${Blue}"
+color["sqlerr"]="${Red}"
+
+function followfile() {
+    declare local file=$1
+    declare local color=$2
+    declare local alias=
+    if [ $# -eq 3 ]
+    then
+        alias="$3"
+    else
+        alias="$(basename $file)"
+    fi
+    printf "\n%s -F %q | sed -u -e 's/ERROR/${Red}ERROR${Normal}/g' -e 's/^/${color}%-8s${Normal}|/' & "  "$tail" "$file" "$alias"
+}
+
+function followit() {
+    declare local index=$1
+    if [[ "${elev[$index]}" = "true" ]]
+    then
+        ( tail='sudo tail'; test='sudo test' )
+    fi
+    followfile "${log[$index]}" "${color[$index]}" "${link[$index]}"
+}
+function followfiles() {
+    for i in "${indeces[@]}";
+    do
+        case "$host" in
+            *-webservice) if [[ "$i" = "aws" || "$i" = "err" ]]; then followit $i; fi ;;
+            *-webapp)     if [[ "$i" = "arc" || "$i" = "err" ]]; then followit $i; fi ;;
+            *-db)         if [[ "$i" = "sql" ]]; then followit $i; fi ;;
+            *)            followit $i ;;
+        esac
+    done;
+    echo ""
+}
+
+while [[ $# -gt 0 ]]; do
+    arg="$1"
+    shift
+    case "$arg" in
+        --pid=*)    pid="${arg#--pid=}";;
+        --pid)      pid="$1"; shift;;
+        --elevate)  tail='sudo tail'; test='sudo test';;
+        --grep)     grep="$1"; shift;;
+        --grep=*)   grep="${arg#--grep=}";;
+        /*)         files=("${files[@]}" "$arg");;
+        *)          files=("${files[@]}" "$(pwd)/${arg}");
+    esac
+done
+
+if [[ ${#files[@]} -eq 0 ]];
+then
+   [[ $DRY ]] && followfiles || eval `followfiles`
+else
+    for file in "${files[@]}";
+    do
+        eval followfile "$file" "${Magenta}";
+    done;
+fi
